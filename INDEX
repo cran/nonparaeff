@@ -1,0 +1,14 @@
+additive.R	Solve Additive Model
+ar.dual.dea.R	Solve Assurance Region (AR) DEA Model
+cost.dea.R	Solve Cost Minimization Problem 
+ddf.R		Solve Direction Distance Function
+dea.R		Solve DEA
+direc.dea.R	Solve Direction Distance Function with Undesirable Outputs
+dual.dea.R	Solve Dual DEA
+faremalm2.R	Solve Malmquist Productivity Growth Index
+fdh.R		Solve Free Disposable Hull (FDH) Model
+int.dea.R	Solve DEA with Integer-valued Inputs/Outputs
+orderm.R	Solve order-m
+revenue.dea.R	Solve Revenue Maximization Problem
+sbm.tone.R	Solve Slacks-based Model under CRS assumption
+sbm.vrs.R	Solve Slacks-based Model under VRS assumption

@@ -43,7 +43,7 @@ fdh <- function(base = NULL, frontier = NULL,
       front.idx.y <- apply(front.Y >= y0, 2, prod) == 1
       front.idx <- which(front.idx.x * front.idx.y == 1)
       mat <- matrix(front.Y[,front.idx]/y0, nrow = m, ncol = length(front.idx))
-      eff <- min(apply(mat, 2, max))
+      eff <- max(apply(mat, 2, min))
     }
     re[i,1] <- eff
   }

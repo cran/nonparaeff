@@ -4,7 +4,7 @@ dea <- function(base = NULL, frontier = NULL,
   require(lpSolve)
   require(gdata)
   require(Hmisc)
-  require(Design)
+  require(rms)
 
   if(is.null(frontier))
     frontier <- base

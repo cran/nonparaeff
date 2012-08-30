@@ -27,7 +27,7 @@ revenue.dea <- function(base = NULL, frontier = NULL,
   front.Y <- t(frontier[, 1:s])
   front.X <- t(frontier[, (s+1):(s+m)])
   base.Y <- t(base[, 1:s])
-  base.X <- t(frontier[, (s+1):(s+m)])
+  base.X <- t(base[, (s+1):(s+m)])
 
   ps <- output.price
   each.revenue <- base.Y * output.price

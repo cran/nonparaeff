@@ -1,10 +1,9 @@
 Package: nonparaeff
-Version: 0.5-3
-Date: 2011-11-17
+Version: 0.5-5
+Date: 2012-08-30
 Title: Nonparametric Methods for Measuring Efficiency and Productivity
-Author: Dong-hyun Oh <oh.donghyun77@gmail.com>
-Maintainer: Dong-hyun Oh <oh.donghyun77@gmail.com>, Dukrok Suh
-        <dukrok@gmail.com>
+Author: Dong-hyun Oh <oh.donghyun77@gmail.com>, with Dukrok Suh
+Maintainer: Dong-hyun Oh <oh.donghyun77@gmail.com>
 Depends: R (>= 1.8.0), lpSolve, gdata, Hmisc, rms, geometry, psych, pwt
 Suggests: gtools
 Description: This package contains functions for measuring efficiency
@@ -13,6 +12,6 @@ Description: This package contains functions for measuring efficiency
         variations.
 License: GPL (>= 2)
 URL: http://www.r-project.org
-Packaged: 2011-11-22 10:45:27 UTC; arecibo
 Repository: CRAN
-Date/Publication: 2011-11-22 12:19:11
+Packaged: 2012-08-30 02:13:50 UTC; arecibo
+Date/Publication: 2012-08-30 05:18:42

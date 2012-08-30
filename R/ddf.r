@@ -34,7 +34,7 @@ ddf <- function(base = NULL, frontier = NULL,
   front.Y <- t(frontier[, 1:s])
   front.X <- t(frontier[, (s+1):(s+m)])
   base.Y <- t(base[, 1:s])
-  base.X <- t(frontier[, (s+1):(s+m)])
+  base.X <- t(base[, (s+1):(s+m)])
 
   front.mat <- rbind(front.X, front.Y, 1)
   slack.mat <- rbind(diag(m+s) *c(rep(1, m), rep(-1, s)), rep(0, m + s))

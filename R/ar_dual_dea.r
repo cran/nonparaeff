@@ -40,7 +40,7 @@ ar.dual.dea <-
   front.Y <- as.matrix(frontier[, 1:s])
   front.X <- as.matrix(frontier[, (s+1):(s+m)])
   base.Y <- as.matrix(base[, 1:s])
-  base.X <- as.matrix(frontier[, (s+1):(s+m)])
+  base.X <- as.matrix(base[, (s+1):(s+m)])
 
   if(dual == FALSE){
     re <- data.frame(matrix(0, nrow = n, ncol = 1 + m + s))

@@ -1,16 +1,15 @@
-# Default NAMESPACE created by R
-# Remove the previous line if you edit this file
-
-# Export all names
-exportPattern(".")
-
-# Import all packages listed as Imports or Depends
-import(
-  lpSolve,
-  gdata,
-  Hmisc,
-  rms,
-  geometry,
-  psych,
-  pwt
-)
+export(additive)
+export(ar.dual.dea)
+export(cost.dea)
+export(ddf)
+export(dea)
+export(direc.dea)
+export(dual.dea)
+export(effdea.b.f)
+export(faremalm2)
+export(fdh)
+export(int.dea)
+export(orderm)
+export(revenue.dea)
+export(sbm.tone)
+export(sbm.vrs)

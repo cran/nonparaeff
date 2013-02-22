@@ -1,4 +1,4 @@
-864d45c2cb277c532d7bc245ab2b4d68 *DESCRIPTION
+4b3431381ed65861fcc7b683ba7b416e *DESCRIPTION
 11e09e2dadd1d3fc172955aec5569a32 *INDEX
 6f13e1aa879870a3e2dd4b13851afc26 *NAMESPACE
 72f1932efea863eb85e26a73269aa297 *R/additive.r
@@ -13,7 +13,7 @@ c8733a32b4d7507543ba3adc9b2ce1cc *R/dual_dea.r
 fc74e6354e572ad3206119e60e0d0096 *R/fdh.r
 e0c2c58e20e095f6389164cb28bfdb4a *R/int_dea.r
 e5271d2f169d22d52e74e1285344f806 *R/lp2.r
-246a12a3a25e4f17da6e71673af6dc2a *R/orderm.r
+4b4543d78cbd61d003b1a638b6d423a9 *R/orderm.r
 cacbb2a23a15e577b441b88c56275abe *R/revenue_dea.r
 dff02be10942d7afd7fcb9b2b37645da *R/sbm_tone.r
 e7f21ebf8f192cef7942e2d06c4f3e15 *R/sbm_vrs.r

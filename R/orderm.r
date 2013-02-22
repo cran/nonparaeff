@@ -45,10 +45,10 @@ orderm <- function(base = NULL, frontier = NULL,
       y0 <- base.Y[,i]
       for(b in 1:B){
       front.idx.x <- apply(front.X <= x0, 2, prod) == 1
-      front.idx <- which(front.idx.y == 1)
+      front.idx <- which(front.idx.x == 1)
       front.idx.m <- sample(front.idx, M, replace = TRUE)
       mat <- matrix(front.Y[,front.idx.m]/y0, nrow = s, ncol = length(front.idx.m))
-      eff[[b]] <- min(apply(mat, 2, max))
+      eff[[b]] <- max(apply(mat, 2, min))
     }
     }
     re[i,1] <- mean(do.call(c, eff))

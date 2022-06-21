@@ -3,7 +3,6 @@ int.dea <- function(base = NULL, frontier = NULL,
                  epsilon = 1e-06) {
   ## data.frame(ys, xi, xc)
 
-  require(lpSolve)
 
   if(intinput < 1){
     stop("The number of integer input must be larger than 1.")

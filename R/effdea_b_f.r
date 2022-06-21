@@ -1,7 +1,5 @@
 effdea.b.f <- function(base = NULL, frontier = NULL, noutput = 1,
                        orientation=1, rts = 1, convhull = TRUE) {
-  require(lpSolve)
-  require(geometry)
 
   if(is.null(frontier))
     frontier <- base

@@ -58,6 +58,7 @@ malm.re1 <- faremalm2(malm.dat, noutput = 1, id = "id", year = "time")
 
 ## Malmquist productivity growth index of OECD countries
 library(pwt)       ## Use Penn World Table
+library(psych)
 my.dat <- pwt5.6    
 head(my.dat)        
 my.oecd.ctry <- c("AUS", "AUT", "BEL", "CAN", "CHE", "DNK", "ESP",

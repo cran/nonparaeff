@@ -3,7 +3,6 @@ revenue.dea <- function(base = NULL, frontier = NULL,
 
   ## output.price: c(p1', p2', ..., ps')
   
-  require(lpSolve)
 
   if(is.null(frontier))
     frontier <- base

@@ -1,8 +1,6 @@
 dual.dea <- function(base = NULL, frontier = NULL,
                      noutput = 1, orientation=1, rts = 1) {
 
-  require(lpSolve)
-
   if(is.null(frontier))
     frontier <- base
 

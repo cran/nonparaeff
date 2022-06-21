@@ -1,5 +1,3 @@
-require(lpSolve)
-
 lp2 <- function(direction = "min", objective.in, const.mat, const.dir, 
                 const.rhs, free.var = NULL){
 

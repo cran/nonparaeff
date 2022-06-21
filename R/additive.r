@@ -1,5 +1,4 @@
 additive <- function(base = NULL, frontier = NULL, noutput = 1){
-  require(lpSolve)
 
   if(is.null(frontier))
     frontier <- base

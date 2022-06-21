@@ -1,6 +1,5 @@
 orderm <- function(base = NULL, frontier = NULL,
                  noutput = 1, orientation=1, M = 25, B = 500) {
-  require(lpSolve)
 
   if(is.null(frontier))
     frontier <- base

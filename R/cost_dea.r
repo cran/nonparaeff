@@ -3,7 +3,6 @@ cost.dea <- function(base = NULL, frontier = NULL,
 
   ## input.price: c(w1', w2', ..., wm')
   
-  require(lpSolve)
 
   if(is.null(frontier))
     frontier <- base

@@ -39,7 +39,7 @@ virtual prices for inputs and outputs.
 }
 
 \author{Dong-hyun Oh, \email{oh.donghyun77@gmail.com}}
-\seealso{\code{\link{dea}}, \code{\link{ar.dual.dea}}}
+\seealso{\code{\link{dea}}}
 
 \examples{
 ## An output-oriented primal problem with 1 input and 2 outputs

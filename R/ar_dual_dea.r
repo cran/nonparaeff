@@ -3,8 +3,6 @@ ar.dual.dea <-
            noutput = 1, orientation=1, rts = 1, ar.l = NULL,
            ar.r = NULL, ar.dir = NULL, dual = FALSE)
 {
-  require(lpSolve)
-
   if(is.null(ar.l) | !is.matrix(ar.l))
     stop("You should give the left hand side of AR restrictions as a form of a matrix!")
   if(is.null(ar.r))
@@ -92,8 +90,6 @@ ar.dual.dea <-
       else{
         re.tmp <- lp("max", f.obj, f.con, f.dir, f.rhs, compute.sens =
                      TRUE)$duals[1:(1+nf+m+s)]
-        ## 여기에 q1, q1를 더하고 빼야 하는 작업을 해야 함.
-        
       }
     }
 

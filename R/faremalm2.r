@@ -1,8 +1,5 @@
 faremalm2 <- function(dat = NULL, noutput = 1, id = "id", year =
                       "year"){
-  require(gdata)
-  require(Hmisc)
-  require(psych)
 
   dat <- dat[order(dat[[id]], dat[[year]]),]
   ids <- as.character(unique(dat[[id]]))
@@ -21,7 +18,7 @@ faremalm2 <- function(dat = NULL, noutput = 1, id = "id", year =
     frontier <- tmp[, xy.idx]
     if(nrow(tmp) > 100)
       Dt2t2[[paste("X",j, sep = "")]] <-
-        unlist(1/effdea.b.f(base, frontier, noutput = noutput,
+        unlist(1/dea(base, frontier, noutput = noutput,
                             orientation = 2, rts = 1))
     else
       Dt2t2[[paste("X",j, sep = "")]] <-
@@ -48,7 +45,7 @@ faremalm2 <- function(dat = NULL, noutput = 1, id = "id", year =
     frontier <- tmp.f[, xy.idx]
     if(nrow(tmp.b) > 100)
       Dtt2[[paste("X",j, sep = "")]] <-
-        unlist(1/effdea.b.f(base, frontier, noutput = noutput,
+        unlist(1/dea(base, frontier, noutput = noutput,
                             orientation = 2, rts = 1))
     else
       Dtt2[[paste("X",j, sep = "")]] <-
@@ -76,7 +73,7 @@ faremalm2 <- function(dat = NULL, noutput = 1, id = "id", year =
     frontier <- tmp.f[, xy.idx]
     if(nrow(tmp.f) > 100)
       Dt2t[[paste("X",j+1, sep = "")]] <-
-        unlist(1/effdea.b.f(base, frontier, noutput = noutput,
+        unlist(1/dea(base, frontier, noutput = noutput,
                             orientation = 2, rts = 1))
     else
       Dt2t[[paste("X",j+1, sep = "")]] <-

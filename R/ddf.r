@@ -3,8 +3,6 @@ ddf <- function(base = NULL, frontier = NULL,
 {
   # format of direction : (g_x's, g_y's)
   
-  require(lpSolve)
-
   if(mode(direction) != "numeric" | is.null(direction))
     stop("direction must be a vector or NULL!!")
   

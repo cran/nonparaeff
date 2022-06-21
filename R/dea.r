@@ -1,10 +1,6 @@
 dea <- function(base = NULL, frontier = NULL,
-                noutput = 1, orientation=1, rts = 1, onlytheta = FALSE) {
-
-  require(lpSolve)
-  require(gdata)
-  require(Hmisc)
-  require(rms)
+                noutput = 1, orientation=1, rts = 1, onlytheta =
+                    FALSE) {
 
   if(is.null(frontier))
     frontier <- base
@@ -26,102 +22,129 @@ dea <- function(base = NULL, frontier = NULL,
   n <- nrow(base)
   nf <- nrow(frontier)
 
-  front.Y <- t(frontier[, 1:s])
-  front.X <- t(frontier[, (s+1):(s+m)])
+  Y.f <- t(frontier[, 1:s])
+  X.f <- t(frontier[, (s+1):(s+m)])
   if(n == 1){
-    base.Y <- matrix(base[, 1:s], ncol = 1)
-    base.X <- matrix(base[, (s+1):(s+m)], ncol = 1)
+    Y.b <- matrix(base[, 1:s], ncol = 1)
+    X.b <- matrix(base[, (s+1):(s+m)], ncol = 1)
   }
   else{
-    base.Y <- t(base[, 1:s])
-    base.X <- t(base[, (s+1):(s+m)])
+    Y.b <- t(base[, 1:s])
+    X.b <- t(base[, (s+1):(s+m)])
   }
 
-  if(rts == 1){
-    front.mat <- rbind(front.X, front.Y)
-    slack.mat <- diag(m+s) *c(rep(1, m), rep(-1, s))
-  }
-  else{
-    front.mat <- rbind(front.X, front.Y, 1)
-    slack.mat <- rbind(diag(m+s) *c(rep(1, m), rep(-1, s)), rep(0, m + s))
-  }
-  
-  first.front.mat <- front.mat
-  second.front.mat <- cbind(front.mat, slack.mat)
+  re <- list()
 
   first.obj <- c(1, rep(0, nf))
-  second.obj <- c(rep(0, nf), rep(1, m+s))
-
-  if(onlytheta == FALSE){
-    re <- data.frame(matrix(0, nrow = n, ncol = 1 + nf + m + s))
-    names(re) <- c("eff",
-                   paste("lambda", 1:nf, sep = ""),
-                   paste("slack.x", 1:m, sep = ""),
-                   paste("slack.y", 1:s, sep = ""))
-  }
-  else{
-    re <- data.frame(matrix(0, nrow = n, ncol = 1))
-    names(re) <- c("eff")
-  }
-  
+  first.dir <- rep(">=", m + s)
   for(i in 1:n){
-    f.dir <- c(rep("<=", m), rep(">=", s))
-    if(orientation == 1){
-      f.con1 <- c(-base.X[, i], rep(0, s))
-      f.rhs <- c(rep(0, m), base.Y[, i])
-    }
-    else{
-      f.con1 <- c(rep(0, m), -base.Y[, i])
-      f.rhs <- c(base.X[,i], rep(0, s))
-    }
-
-    if(rts == 2){
-      f.con1 <- c(f.con1, 0)
-      f.rhs <- c(f.rhs, 1)
-      f.dir <- c(f.dir, "==")
-    }
-
-    f.con <- cbind(f.con1, first.front.mat)
-
-    ## first step
-    if(orientation == 1)
-      tmp.re <- lp("min", first.obj, f.con, f.dir, f.rhs)
-    else
-      tmp.re <- lp("max", first.obj, f.con, f.dir, f.rhs)
-
-    if(onlytheta == FALSE){
-      re[i,1:(1+nf)] <- tmp.re$solution[1:(1+nf)]
-    }
-    else{
-      re[i, 1] <- tmp.re$solution[1]
-    }
-
-    if(onlytheta == FALSE){
-      ## second step
-      f.obj <- c(rep(0, nf), rep(1, m+s))
+    if(onlytheta == TRUE){
       if(rts == 1){
-        f.dir <- rep("==", m+s)
-        f.rhs <- c(base.X[,i], base.Y[,i])
-        if(orientation == 1)
-          f.rhs <- f.rhs * c(rep(re[i,1], m), rep(1, s))
-        else
-          f.rhs <- f.rhs * c(rep(1, m), rep(re[i,1], s))
+        if(orientation == 1){
+          ## input-oriented CRS
+          obj <- first.obj
+          dir <- first.dir
+          rhs <- c(rep(0, m), Y.b[, i])
+          con1 <- cbind(X.b[, i], -X.f)
+          con2 <- cbind(rep(0, s), Y.f)
+          con <- rbind(con1, con2)
+          re[[i]] <- lp("min", obj, con, dir, rhs)$solution[1]
+        }
+        else{
+          ## output-oriented CRS
+          obj <- first.obj
+          dir <- first.dir
+          rhs <- c(-X.b[, i], rep(0, s))
+          con1 <- cbind(rep(0, m), -X.f)
+          con2 <- cbind(-Y.b[, i], Y.f)
+          con <- rbind(con1, con2)
+          re[[i]] <- lp("max", obj, con, dir, rhs)$solution[1]
+        }
       }
       else{
-        f.dir <- rep("==", m+s+1)
-        f.rhs <- c(base.X[,i], base.Y[,i], 1)
-        if(orientation == 1)
-          f.rhs <- f.rhs * c(rep(re[i,1], m), rep(1, s), 1)
-        else
-          f.rhs <- f.rhs * c(rep(1, m), rep(re[i,1], s), 1)
+        if(orientation == 1){
+          ## input-oriented VRS
+          obj <- first.obj
+          dir <- c(first.dir, "==")
+          rhs <- c(rep(0, m), Y.b[, i], 1)
+          con1 <- cbind(X.b[, i], -X.f)
+          con2 <- cbind(rep(0, s), Y.f)
+          con3 <- c(0, rep(1, nf))
+          con <- rbind(con1, con2, con3)
+          re[[i]] <- lp("min", obj, con, dir, rhs)$solution[1]
+        }
+        else{
+          ## output-oriented VRS
+          obj <- first.obj
+          dir <- c(first.dir, "==")
+          rhs <- c(-X.b[, i], rep(0, s), 1)
+          con1 <- cbind(rep(0, m), -X.f)
+          con2 <- cbind(-Y.b[, i], Y.f)
+          con3 <- c(0, rep(1, nf))
+          con <- rbind(con1, con2, con3)
+          re[[i]] <- lp("max", obj, con, dir, rhs)$solution[1]
+        }
       }
-
-      f.con <- second.front.mat
-      
-      tmp.re <- lp("max", second.obj, f.con, f.dir, f.rhs)$solution
-      re[i, (2+nf):(1+nf+m+s)] <- tmp.re[(nf+1):(nf+m+s)]
     }
 
+    else{ ## with lambda and slack
+      if(rts == 1){
+        if(orientation == 1){
+          ## input-oriented CRS
+          obj <- c(first.obj, rep(0, m + s))
+          dir <- rep("==", m + s)
+          rhs <- c(rep(0, m), Y.b[, i])
+          con1 <- cbind(X.b[, i], -X.f, -diag(m), matrix(0, m, s))
+          con2 <- cbind(rep(0, s), Y.f, matrix(0, s, m), -diag(s))
+          con <- rbind(con1, con2)
+          re[[i]] <- lp("min", obj, con, dir, rhs)$solution
+        }
+        else{
+          ## output-oriented CRS
+          obj <- c(first.obj, rep(0, m + s))
+          dir <- rep("==", m + s)
+          rhs <- c(-X.b[, i], rep(0, s))
+          con1 <- cbind(rep(0, m), -X.f, -diag(m), matrix(0, m, s))
+          con2 <- cbind(Y.b[, i], -Y.f, matrix(0, s, m), diag(s))
+          con <- rbind(con1, con2)
+          re[[i]] <- lp("max", obj, con, dir, rhs)$solution
+        }
+      }
+      else{
+        if(orientation == 1){
+          ## input-oriented VRS
+          obj <- c(first.obj, rep(0, m + s))
+          dir <- rep("==", m + s + 1)
+          rhs <- c(rep(0, m), Y.b[, i], 1)
+          con1 <- cbind(X.b[, i], -X.f, -diag(m), matrix(0, m, s))
+          con2 <- cbind(rep(0, s), Y.f, matrix(0, s, m), -diag(s))
+          con3 <- c(0, rep(1, nf), rep(0, m + s))
+          con <- rbind(con1, con2, con3)
+          re[[i]] <- lp("min", obj, con, dir, rhs)$solution
+        }
+        else{
+          ## output-oriented VRS
+          obj <- c(first.obj, rep(0, m + s))
+          dir <- rep("==", m + s + 1)
+          rhs <- c(-X.b[, i], rep(0, s), 1)
+          con1 <- cbind(rep(0, m), -X.f, -diag(m), matrix(0, m, s))
+          con2 <- cbind(Y.b[, i], -Y.f, matrix(0, s, m), diag(s))
+          con3 <- c(0, rep(1, nf), rep(0, m + s))
+          con <- rbind(con1, con2, con3)
+          re[[i]] <- lp("max", obj, con, dir, rhs)$solution
+        }
+      }
+    }
+  }
+  re <- data.frame(do.call(rbind, re))
+  
+  if(onlytheta == TRUE){
+    names(re) <- "eff"
+  }
+  else{
+    names(re) <-
+      c("eff", paste("lambda.", 1:nf, sep = ""),
+        paste("slack.x", 1:m, sep = ""), paste("slack.y", 1:s, sep = ""))
   }
   return(re)
 }

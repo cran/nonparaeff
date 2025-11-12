@@ -31,7 +31,8 @@ lp2(direction = "min", objective.in, const.mat, const.dir,
 }
 
 \author{Dong-hyun Oh, \email{oh.donghyun77@gmail.com}}
-\seealso{\code{\link{lp}}}
+
+\seealso{\code{\link[lpSolve:lp]{lp}}}
 
 \examples{
      # Set up problem: maximize

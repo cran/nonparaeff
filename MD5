@@ -1,4 +1,4 @@
-9b89e3cdae49493ccabe77ef7b84454e *DESCRIPTION
+21e1c2884d7bae09d20267ba0927d5ac *DESCRIPTION
 b349ed5d304eb6e99a70357a851f0f85 *NAMESPACE
 c490db62319e5860c4a47684f7920fdf *R/additive.r
 fbed52edd1d50e222f0e9b7fec753074 *R/ar_dual_dea.r
@@ -16,7 +16,6 @@ df15ddabe0b6f2e2f8348f3fd2c90c6d *R/fdh.r
 04d4dad9c18b68d4c33df52887797b19 *R/revenue_dea.r
 e98ff54177bff28fc86252854d4ca78c *R/sbm_tone.r
 cc702e9bae28210aca03aa207ca37179 *R/sbm_vrs.r
-41911760dfc7fdad65c763f40eff4070 *README.md
 3cb8bc3528398aa781c6c40939878877 *man/additive.Rd
 ee114845b44cc1d53f60b2fc0035ed57 *man/ar.dual.dea.Rd
 2f07c46cc499be8cb8a2870c7179ca94 *man/cost.dea.Rd
@@ -28,7 +27,7 @@ fb8fd3a49d70d449af7950ec5a15c9a2 *man/direc.dea.Rd
 91eb2424b537ce617c666c530031d7ad *man/faremalm2.Rd
 dd68ce8d7ec6f7048d5425d5df33b6ee *man/fdh.Rd
 d3428062736f91d344719aa6957d4042 *man/int.dea.Rd
-cace652ea166a47335fca656bf287289 *man/lp2.Rd
+0ee4d35c28a961f47ae120fc1f46fd38 *man/lp2.Rd
 b5060f4524c9cee4703a426f6ecb6cf4 *man/orderm.Rd
 1a04d337775a7cf1dbc393d476617b93 *man/revenue.dea.Rd
 bc933e8e4f923f77c501f59bbed30a35 *man/sbm.tone.Rd

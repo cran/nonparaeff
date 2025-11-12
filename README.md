@@ -1,1 +1,0 @@
-# R pacakge for measuring efficiency and productivity
